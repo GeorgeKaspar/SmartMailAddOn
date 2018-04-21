@@ -5,9 +5,6 @@
   "browser_action": {
   },
   "permissions": [
-    "webRequest",
-    "webRequestBlocking",
-    "browsingData",
     "http://*/*",
     "https://*/*"
   ],
