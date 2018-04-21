@@ -1,1 +1,1 @@
-from .ner import process_text
+from .process_text import process_text
