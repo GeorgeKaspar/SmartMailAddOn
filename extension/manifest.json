@@ -4,12 +4,18 @@
   "version": "0.1",
   "browser_action": {
   },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "http://*/*",
+    "https://*/*"
+  ],
   "content_scripts": [{
       "matches": [
-        "https://e.mail.ru/messages/inbox/"
+        "https://e.mail.ru/messages/inbox/*"
       ],
       "js": ["user.js"]
     }
-  ],
-  "content_security_policy": "default-src 'self' *.ngrok.com"
+  ]
 }
