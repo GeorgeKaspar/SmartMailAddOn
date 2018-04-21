@@ -22,10 +22,8 @@ def process():
 	print(json_data)
 	json_data = json_data['messages']
 	print(json_data)
-	results = {}
-	for key, value in json_data.items():
-		rank = get_rank(key, value)
-		results[key] = rank
+	print(json_data.items())
+	results = get_rank(json_data.items())
 	response = flask.jsonify({'results': results})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	return response
