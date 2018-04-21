@@ -3,7 +3,12 @@ from flask import request
 import flask
 import json
 import pprint
-from ../server/ner import process_text as get_rank
+
+import sys
+sys.path.insert(0, '../server')
+
+from ner import process_text as get_rank
+
 app = Flask(__name__)
 
 @app.route('/')
