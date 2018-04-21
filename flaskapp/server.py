@@ -7,7 +7,7 @@ import pprint
 import sys
 sys.path.insert(0, '../server')
 
-from ner import process_text as get_rank
+from process_text import process_text as get_rank
 
 app = Flask(__name__)
 
