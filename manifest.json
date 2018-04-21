@@ -1,0 +1,30 @@
+{
+
+  "manifest_version": 2,
+  "name": "SmartMail",
+  "version": "1.0",
+
+  "description": "Short description of your letters",
+
+  "icons": {
+    "48": "icons/icon.png"
+  },
+  
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "SmartMail"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://e.mail.ru/messages/inbox/*"],
+      "js": ["SmartMail.js"]
+    }
+  ]
+
+}
