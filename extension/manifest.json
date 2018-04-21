@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "SmartMail Events",
+  "version": "0.1",
+  "browser_action": {
+  },
+  "content_scripts": [{
+      "matches": [
+        "https://e.mail.ru/messages/inbox/"
+      ],
+      "js": ["user.js"]
+    }
+  ],
+  "content_security_policy": "default-src 'self' *.ngrok.com"
+}
