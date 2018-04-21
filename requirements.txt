@@ -1,0 +1,9 @@
+flask
+numpy
+tensorflow
+tqdm
+pymorphy2
+requests
+pymorphy2-dicts
+gensim
+git+https://github.com/deepmipt/ner
