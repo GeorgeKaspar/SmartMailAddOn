@@ -7,3 +7,4 @@ requests
 pymorphy2-dicts
 gensim
 git+https://github.com/deepmipt/ner
+pymystem3
