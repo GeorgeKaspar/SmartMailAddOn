@@ -13,6 +13,7 @@ def prettify(tokens):
     for elem in tokens:
         top[elem["type"]].add(elem["text"])
     res = "В письме упоминается: "
+    N = len(res)
     if "ORG" in top.keys():
         res += "орг. "
         res += ", ".join(top["ORG"])
@@ -25,7 +26,7 @@ def prettify(tokens):
         res += "местоп. "
         res += ", ".join(top["LOC"])
         res += "; "
-    return res[:-2] if len(res) > 0 else ""
+    return res[:-2] if len(res) > N else ""
 
 def process_text(data):
     """ Proccesses input data, returns message of contents in letters
