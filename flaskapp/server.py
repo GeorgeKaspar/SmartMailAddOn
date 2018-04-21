@@ -3,6 +3,7 @@ from flask import request
 import flask
 import json
 import pprint
+from ../server/ner import process_text as get_rank
 app = Flask(__name__)
 
 @app.route('/')
