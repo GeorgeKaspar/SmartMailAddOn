@@ -48,9 +48,17 @@ const rankMessages = async () => {
     method: 'POST',
     mode: 'cors'
   })).json()
-  const results = response
+  const results = response['results']
   console.log('Results')
   console.log(results)
+
+  for (let item of results) {
+    const id = item.url
+    const node = document.querySelector(`.b-datalist__item[data-id="${id}"]`)
+    const elementHTML = '<div style="border: 1px solid #FDA840; color: black !important; font-weight: normal !important; padding-left: .5em; padding-right: .5em; background-color: #fffce1;">' + item.message + '</div>'
+    node.querySelector('.b-datalist__item__wrapper').innerHTML += elementHTML
+    node.querySelector('.b-datalist__item__body').style.height = '6em'
+  }
 }
 
 (() => {
