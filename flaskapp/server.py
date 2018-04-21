@@ -15,9 +15,6 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
-def get_rank(key, value):
-	return '{} + {}'.format(key, value)
-
 @app.route('/process', methods=['POST'])
 def process():
 	print(request)
