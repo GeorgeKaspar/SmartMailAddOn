@@ -2,6 +2,7 @@
   "manifest_version": 2,
   "name": "SmartMail Events",
   "version": "0.1",
+  "author": "Sector B",
   "browser_action": {
   },
   "permissions": [
