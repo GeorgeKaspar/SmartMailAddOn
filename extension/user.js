@@ -16,10 +16,13 @@ const fetchMessage = async (msg, token) => {
 const rankMessages = async () => {
   const token = document.querySelector('html').outerHTML.match(/patron\.updateToken\("(.*)"\)/)[1]
 
+  document.querySelector('#b-letters').style.opacity = '0.5'
+
   const messages = []
   for (let elem of document.getElementsByClassName('js-href b-datalist__item__link')) {
+    const id = elem.href.split('/')[4]
     messages.push({
-      id: elem.href.split('/')[4],
+      id: id,
       elem: elem
     })
   }
@@ -52,12 +55,32 @@ const rankMessages = async () => {
   console.log('Results')
   console.log(results)
 
+
+  const nodes = []
+
   for (let item of results) {
     const id = item.url
     const node = document.querySelector(`.b-datalist__item[data-id="${id}"]`)
     const elementHTML = '<div style="border: 1px solid #FDA840; color: black !important; font-weight: normal !important; padding-left: .5em; padding-right: .5em; background-color: #fffce1;">' + item.message + '</div>'
     node.querySelector('.b-datalist__item__wrapper').innerHTML += elementHTML
     node.querySelector('.b-datalist__item__body').style.height = '6em'
+
+    nodes.push(node)
+    node.remove()
+  }
+
+  for (let node of nodes) {
+    if (new Set(node.classList.values()).has('b-datalist__item_unread')) {
+      document.querySelector('.b-datalist__body').appendChild(node)
+    }
+  }
+
+  document.querySelector('#b-letters').style.opacity = ''
+
+  for (let i of document.getElementsByClassName('js-href b-datalist__item__link')) {
+    (() => {
+      i.onclick = () => {window.open(i.href); return false;
+    }})()
   }
 }
 
