@@ -1,4 +1,4 @@
-const SERVICE_URL = 'https://ce0de1df.ngrok.io/process'
+const SERVICE_URL = 'https://3bfaf6e6.ngrok.io/process'
 const MAIL_THREAD_URL = 'https://e.mail.ru/api/v1/threads/thread?ajax_call=1&tarball=e.mail.ru-f-alpha-mail-64117-v.demidov-1523618897.tgz&offset=0&limit=50&htmlencoded=false&cache=false&api=1'
 
 const fetchMessage = async (msg, token) => {
@@ -21,10 +21,12 @@ const rankMessages = async () => {
   const messages = []
   for (let elem of document.getElementsByClassName('js-href b-datalist__item__link')) {
     const id = elem.href.split('/')[4]
-    messages.push({
-      id: id,
-      elem: elem
-    })
+    if (new Set(document.querySelector(`.b-datalist__item[data-id="${id}"]`).classList.values()).has('b-datalist__item_unread')) {
+      messages.push({
+        id: id,
+        elem: elem
+      })
+    }
   }
 
   const bodies = await Promise.all(messages.map(msg => fetchMessage(msg, token)))
@@ -61,7 +63,7 @@ const rankMessages = async () => {
   for (let item of results) {
     const id = item.url
     const node = document.querySelector(`.b-datalist__item[data-id="${id}"]`)
-    const elementHTML = '<div style="border: 1px solid #FDA840; color: black !important; font-weight: normal !important; padding-left: .5em; padding-right: .5em; background-color: #fffce1;">' + item.message + '</div>'
+    const elementHTML = '<div style="border: 1px solid #FDA840; color: black !important; font-weight: normal !important; padding-left: .5em; padding-right: .5em; background-color: #fffce1; max-height: 2.5em; overflow: hidden !important; resize: none !important; text-overflow: ellipsis !important; white-space: nowrap !important;">' + item.message + '</div>'
     node.querySelector('.b-datalist__item__wrapper').innerHTML += elementHTML
     node.querySelector('.b-datalist__item__body').style.height = '6em'
 
@@ -71,7 +73,7 @@ const rankMessages = async () => {
 
   for (let node of nodes) {
     if (new Set(node.classList.values()).has('b-datalist__item_unread')) {
-      document.querySelector('.b-datalist__body').appendChild(node)
+      document.querySelector('.b-datalist__body').insertBefore(node, document.querySelector('.b-datalist__body').childNodes[0])
     }
   }
 
@@ -79,7 +81,12 @@ const rankMessages = async () => {
 
   for (let i of document.getElementsByClassName('js-href b-datalist__item__link')) {
     (() => {
-      i.onclick = () => {window.open(i.href); return false;
+      i.onclick = () => {
+        window.open(i.href)
+        i.remove()
+        // document.querySelector('.b-datalist__body').insertBefore(i,
+        //   document.querySelector('.b-datalist__item .b-datalist__item_unread'))
+        return false
     }})()
   }
 }
